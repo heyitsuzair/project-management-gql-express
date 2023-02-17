@@ -1,8 +1,8 @@
 const { clients } = require("../../sampleData");
 
-module.exports.findAll = () => {
+module.exports.findAllClients = () => {
   return clients;
 };
-module.exports.findOne = (args) => {
+module.exports.findOneClient = (args) => {
   return clients.find((client) => client.id === args.id);
 };

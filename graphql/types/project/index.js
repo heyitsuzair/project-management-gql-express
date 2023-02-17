@@ -1,5 +1,6 @@
 const { GraphQLID, GraphQLString, GraphQLObjectType } = require("graphql");
-const { clientType } = require("../index");
+const { clientType } = require("../client");
+const { findOneClient } = require("../../../controllers/clients");
 
 // Project Type
 const projectType = new GraphQLObjectType({
@@ -9,7 +10,7 @@ const projectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
-    client: { type: clientType },
+    client: { type: clientType, resolve: (parent) => findOneClient(parent) },
   }),
 });
 module.exports = { projectType };
