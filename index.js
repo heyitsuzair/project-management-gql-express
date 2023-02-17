@@ -8,6 +8,19 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
+/**
+ * GraphQl Configuration
+ */
+const { graphqlHTTP } = require("express-graphql");
+const schema = require("./graphql/schema");
+app.use(
+  "/graphql",
+  graphqlHTTP({ schema, graphiql: process.env.NODE_ENV === "development" })
+);
+
+/**
+ * GraphQl Configuration
+ */
 mongoose.set("strictQuery", true);
 
 mongoose
