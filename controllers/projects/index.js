@@ -10,3 +10,12 @@ module.exports.findOneProject = async (id) => {
   }
   return await ProjectsModel.findById(id);
 };
+module.exports.createProject = async (args) => {
+  return await ProjectsModel.create(args);
+};
+module.exports.deleteProject = async (id) => {
+  if (!isValidObjectId(id)) {
+    return null;
+  }
+  return await ProjectsModel.findByIdAndDelete(id);
+};

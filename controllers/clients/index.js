@@ -14,5 +14,8 @@ module.exports.createClient = async (args) => {
   return await ClientsModel.create(args);
 };
 module.exports.deleteClient = async (id) => {
+  if (!isValidObjectId(id)) {
+    return null;
+  }
   return await ClientsModel.findByIdAndDelete(id);
 };

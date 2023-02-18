@@ -1,4 +1,9 @@
-const { clientFields } = require("./clients");
-const { projectFields } = require("./projects");
+const { clientFields, clientMutations } = require("./clients");
+const { projectFields, projectMutations } = require("./projects");
 
-module.exports = { clientFields, projectFields };
+module.exports = {
+  clientFields,
+  projectFields,
+  clientMutations,
+  projectMutations,
+};
