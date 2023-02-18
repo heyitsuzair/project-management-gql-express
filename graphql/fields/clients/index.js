@@ -36,7 +36,7 @@ module.exports.clientMutations = {
   deleteClient: {
     type: clientType,
     args: {
-      id: { type: new GraphQLNonNull(GraphQLString) },
+      id: { type: new GraphQLNonNull(GraphQLID) },
     },
     resolve: (parent, args) => deleteClient(args.id),
   },
