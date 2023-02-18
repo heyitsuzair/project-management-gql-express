@@ -10,6 +10,7 @@ const {
   findAllProjects,
   createProject,
   deleteProject,
+  updateProject,
 } = require("../../../controllers/projects");
 const { projectType } = require("../../types");
 
@@ -51,5 +52,25 @@ module.exports.projectMutations = {
       id: { type: new GraphQLNonNull(GraphQLString) },
     },
     resolve: (parent, { id }) => deleteProject(id),
+  },
+  updateProject: {
+    type: projectType,
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLID) },
+      name: { type: new GraphQLNonNull(GraphQLString) },
+      description: { type: new GraphQLNonNull(GraphQLString) },
+      status: {
+        type: new GraphQLEnumType({
+          name: "updateProjectStatus",
+          values: {
+            new: { value: "Not Started" },
+            progress: { value: "In Progress" },
+            completed: { value: "Completed" },
+          },
+        }),
+      },
+      clientId: { type: new GraphQLNonNull(GraphQLString) },
+    },
+    resolve: (parent, args) => updateProject(args),
   },
 };
