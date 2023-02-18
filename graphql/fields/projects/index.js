@@ -13,6 +13,6 @@ module.exports.projectFields = {
   project: {
     type: projectType,
     args: { id: { type: GraphQLID } },
-    resolve: (parents, args) => findOneProject(args),
+    resolve: (parent, args) => findOneProject(args),
   },
 };

@@ -1,8 +1,12 @@
-const { projects } = require("../../sampleData");
+const ProjectsModel = require("../../models/ProjectsModel");
+const { isValidObjectId } = require("mongoose");
 
-module.exports.findAllProjects = () => {
-  return projects;
+module.exports.findAllProjects = async () => {
+  return await ProjectsModel.find();
 };
-module.exports.findOneProject = (args) => {
-  return projects.find((client) => client.id === args.id);
+module.exports.findOneProject = async (id) => {
+  if (!isValidObjectId(id)) {
+    return null;
+  }
+  return await ProjectsModel.findById(id);
 };

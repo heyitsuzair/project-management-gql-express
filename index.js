@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const { bgRed, bgBlue } = require("colors");
 
 const app = express();
 require("dotenv").config();
@@ -29,12 +30,12 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("DB Connected");
+    console.log("DB Connected".bgBlue.bold);
   })
   .catch((error) => {
     console.log(error.message);
   });
 
 const server = app.listen(process.env.PORT, () => {
-  console.log("Listening On Port " + process.env.PORT);
+  console.log(`Listening On Port ${process.env.PORT}`.bgRed.bold);
 });

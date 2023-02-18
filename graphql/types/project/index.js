@@ -10,7 +10,10 @@ const projectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
-    client: { type: clientType, resolve: (parent) => findOneClient(parent) },
+    client: {
+      type: clientType,
+      resolve: (parent) => findOneClient(parent.clientId),
+    },
   }),
 });
 module.exports = { projectType };

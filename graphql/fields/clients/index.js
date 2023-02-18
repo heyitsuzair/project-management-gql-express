@@ -1,7 +1,14 @@
-const { GraphQLList, GraphQLID } = require("graphql");
+const {
+  GraphQLList,
+  GraphQLID,
+  GraphQLNonNull,
+  GraphQLString,
+} = require("graphql");
 const {
   findOneClient,
   findAllClients,
+  createClient,
+  deleteClient,
 } = require("../../../controllers/clients");
 const { clientType } = require("../../types");
 
@@ -13,6 +20,24 @@ module.exports.clientFields = {
   client: {
     type: clientType,
     args: { id: { type: GraphQLID } },
-    resolve: (parents, args) => findOneClient(args),
+    resolve: (parent, args) => findOneClient(args.id),
+  },
+};
+module.exports.clientMutations = {
+  createClient: {
+    type: clientType,
+    args: {
+      name: { type: new GraphQLNonNull(GraphQLString) },
+      email: { type: new GraphQLNonNull(GraphQLString) },
+      phone: { type: new GraphQLNonNull(GraphQLString) },
+    },
+    resolve: (parent, args) => createClient(args),
+  },
+  deleteClient: {
+    type: clientType,
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLString) },
+    },
+    resolve: (parent, args) => deleteClient(args.id),
   },
 };
